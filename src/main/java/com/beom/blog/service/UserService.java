@@ -19,8 +19,12 @@ public class UserService {
             return 1;
         } catch (Exception e) {
             e.printStackTrace();
+            return -1;
         }
-        return -1;
     }
 
+    @Transactional(readOnly = true)
+    public User login(User user) {
+        return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+    }
 }
